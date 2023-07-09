@@ -2,3 +2,6 @@
 	background-color: #040203 !important;
 	background: #040203 !important;
 }
+.header__active-menu-item {
+	color: white !important;
+}
