@@ -21,14 +21,14 @@
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
-/>
+>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
 
 {%- assign product = section.settings.product -%}
 
-{%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
+{%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
 {%- if first_3d_model -%}
   {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
   <link
@@ -49,24 +49,24 @@
 
 <section class="color-{{ section.settings.color_scheme }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %}">
   <div class="swiper">
-  <!-- Additional required wrapper -->
-  <div class="swiper-wrapper">
-    <!-- Slides -->
-    <div class="swiper-slide">Slide 1</div>
-    <div class="swiper-slide">Slide 2</div>
-    <div class="swiper-slide">Slide 3</div>
-    ...
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      ...
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
   </div>
-  <!-- If we need pagination -->
-  <div class="swiper-pagination"></div>
-
-  <!-- If we need navigation buttons -->
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
-
-  <!-- If we need scrollbar -->
-  <div class="swiper-scrollbar"></div>
-</div>
   <div class="page-width section-{{ section.id }}-padding{% if section.settings.secondary_background %} isolate{% endif %}">
     <div class="featured-product product grid grid--1-col gradient color-{{ section.settings.color_scheme }} product--{{ section.settings.media_position }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper{% if section.settings.media_position == 'right' %} medium-hide large-up-hide{% endif %}">
@@ -80,7 +80,14 @@
             {%- if product.selected_or_first_available_variant.featured_media != null -%}
               {%- assign media = product.selected_or_first_available_variant.featured_media -%}
               <div class="product__media-item" data-media-id="{{ section.id }}-{{ media.id }}">
-                {% render 'product-thumbnail', media: media, position: 'featured', loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: false, media_width: 0.5 %}
+                {% render 'product-thumbnail',
+                  media: media,
+                  position: 'featured',
+                  loop: section.settings.enable_video_looping,
+                  modal_id: section.id,
+                  xr_button: false,
+                  media_width: 0.5
+                %}
               </div>
             {%- endif -%}
             {%- liquid
@@ -90,9 +97,18 @@
               endfor
             -%}
             {%- for media in product.media -%}
-              {%- if media_to_render contains media.id and media.id != product.selected_or_first_available_variant.featured_media.id -%}
+              {%- if media_to_render contains media.id
+                and media.id != product.selected_or_first_available_variant.featured_media.id
+              -%}
                 <div class="product__media-item" data-media-id="{{ section.id }}-{{ media.id }}">
-                  {% render 'product-thumbnail', media: media, position: forloop.index, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: false, media_width: 0.5 %}
+                  {% render 'product-thumbnail',
+                    media: media,
+                    position: forloop.index,
+                    loop: section.settings.enable_video_looping,
+                    modal_id: section.id,
+                    xr_button: false,
+                    media_width: 0.5
+                  %}
                 </div>
               {%- endif -%}
             {%- endfor -%}
@@ -138,7 +154,12 @@
                 </h2>
               {%- when 'price' -%}
                 <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                  {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+                  {%- render 'price',
+                    product: product,
+                    use_variant: true,
+                    show_badges: true,
+                    price_class: 'price--large'
+                  -%}
                 </div>
                 {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
                   <div class="product__tax caption rte">
@@ -357,7 +378,13 @@
                         <span class="product-form__error-message"></span>
                       </div>
 
-                      {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                      {%- form 'product',
+                        product,
+                        id: product_form_id,
+                        class: 'form',
+                        novalidate: 'novalidate',
+                        data-type: 'add-to-cart-form'
+                      -%}
                         <input
                           type="hidden"
                           name="id"
@@ -420,12 +447,12 @@
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   {% liquid
                     assign rating_decimal = 0
-                      assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
-                      if decimal >= 0.3 and decimal <= 0.7
+                    assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+                    if decimal >= 0.3 and decimal <= 0.7
                       assign rating_decimal = 0.5
                     elsif decimal > 0.7
                       assign rating_decimal = 1
-                      endif
+                    endif
                   %}
                   <div
                     class="rating"
@@ -448,7 +475,7 @@
                     <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
                     <span class="visually-hidden">
                       {{- product.metafields.reviews.rating_count }}
-                      {{ "accessibility.total_reviews" | t -}}
+                      {{ 'accessibility.total_reviews' | t -}}
                     </span>
                   </p>
                 {%- endif -%}
@@ -479,13 +506,29 @@
               {%- if product.selected_or_first_available_variant.featured_media != null -%}
                 {%- assign media = product.selected_or_first_available_variant.featured_media -%}
                 <div class="product__media-item" data-media-id="{{ section.id }}-{{ media.id }}">
-                  {% render 'product-thumbnail', media: media, position: 'featured', loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: false, media_width: 0.5 %}
+                  {% render 'product-thumbnail',
+                    media: media,
+                    position: 'featured',
+                    loop: section.settings.enable_video_looping,
+                    modal_id: section.id,
+                    xr_button: false,
+                    media_width: 0.5
+                  %}
                 </div>
               {%- endif -%}
               {%- for media in product.media -%}
-                {%- if media_to_render contains media.id and media.id != product.selected_or_first_available_variant.featured_media.id -%}
+                {%- if media_to_render contains media.id
+                  and media.id != product.selected_or_first_available_variant.featured_media.id
+                -%}
                   <div class="product__media-item" data-media-id="{{ section.id }}-{{ media.id }}">
-                    {% render 'product-thumbnail', media: media, position: forloop.index, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: false, media_width: 0.5 %}
+                    {% render 'product-thumbnail',
+                      media: media,
+                      position: forloop.index,
+                      loop: section.settings.enable_video_looping,
+                      modal_id: section.id,
+                      xr_button: false,
+                      media_width: 0.5
+                    %}
                   </div>
                 {%- endif -%}
               {%- endfor -%}
