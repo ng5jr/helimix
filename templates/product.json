@@ -12,11 +12,13 @@
         },
         "title": {
           "type": "title",
-          "settings": {}
+          "settings": {
+          }
         },
         "price": {
           "type": "price",
-          "settings": {}
+          "settings": {
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -26,7 +28,8 @@
         },
         "quantity_selector": {
           "type": "quantity_selector",
-          "settings": {}
+          "settings": {
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -36,14 +39,15 @@
         },
         "description": {
           "type": "description",
-          "settings": {}
+          "settings": {
+          }
         },
         "collapsible-row-0": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Description",
             "icon": "leather",
-            "content": "",
+            "content": "<h3>Free Standard U.S. Shipping. <\/h3><p>Version 2.0 now with a new, more user-friendly lid. Seals tight with a loud snap. Once you get ahold of this thing you'll feel the Made in USA difference. As the leading innovation in shaker cup technology, Helimix is produced with Copolyester BPA\/BPS-free Plastic. Helimix’s hexagonal design acts as a vortex, blending your ingredients to perfection without any extra pieces rattling around inside. The odor-resistant bottle is 100% American-made, ensuring that you are receiving a product that is both safe and of superior quality. 28 ounce volume. <\/p><ol><li>Made in the USA<\/li><li>No Whisks, No Screens, No Clumps<\/li><li>BPA\/BPS-free Plastic<\/li><li>Top Rack Dishwasher Safe<\/li><li>Odor Resistant<\/li><\/ol>",
             "page": ""
           }
         },
@@ -52,15 +56,8 @@
           "settings": {
             "heading": "FAQ",
             "icon": "truck",
-            "content": "",
+            "content": "<p>1) Are the Helimix Shaker Products manufactured in USA?<br\/>A: Yes, all the way down to the packaging.<br\/><br\/>2) What does BPA\/BPS free plastic mean?<br\/>A: It means it contains no such chemicals.<br\/><br\/>3) Does protein mix\/food get stuck to the bottom?<br\/>A: Always add liquid first before adding supplements and nothing will stick to the bottom.<\/p>",
             "page": ""
-          }
-        },
-
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
           }
         }
       },
@@ -73,10 +70,7 @@
         "buy_buttons",
         "description",
         "collapsible-row-0",
-        "collapsible-row-1",
-        "collapsible-row-2",
-        "collapsible-row-3",
-        "share"
+        "collapsible-row-1"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -90,38 +84,6 @@
         "padding_bottom": 12
       }
     },
-    "image-with-text": {
-      "type": "image-with-text",
-      "blocks": {
-        "image-with-text-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image with text",
-            "heading_size": "h1"
-          }
-        },
-        "image-with-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": ["image-with-text-0", "image-with-text-1"],
-      "settings": {
-        "height": "small",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "background-2",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "multicolumn": {
       "type": "multicolumn",
       "blocks": {
@@ -129,7 +91,7 @@
           "type": "column",
           "settings": {
             "title": "Free Shipping",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
             "link_label": "",
             "link": ""
           }
@@ -138,13 +100,16 @@
           "type": "column",
           "settings": {
             "title": "Hassle-Free Exchanges",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
             "link_label": "",
             "link": ""
           }
         }
       },
-      "block_order": ["column-0", "column-1"],
+      "block_order": [
+        "column-0",
+        "column-1"
+      ],
       "settings": {
         "title": "",
         "heading_size": "h1",
@@ -180,5 +145,9 @@
       }
     }
   },
-  "order": ["main", "image-with-text", "multicolumn", "product-recommendations"]
+  "order": [
+    "main",
+    "multicolumn",
+    "product-recommendations"
+  ]
 }
