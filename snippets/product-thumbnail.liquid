@@ -35,9 +35,8 @@ modal_id: section.id
   if mobile_layout == 'columns' and media_count > 1
     assign mobile_columns = 2
   endif
--%}
-
-  {%- capture sizes -%}(min-width: {{ settings.page_width }}px){{ settings.page_width | minus: 100 | times: media_width | divided_by: desktop_columns | round }}px, (min-width: 990px) calc( {{ media_width | times: 100 | divided_by: desktop_columns }} vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw /
+-%}{%- capture sizes -%} (min-width:{{ settings.page_width }}px){{ settings.page_width | minus: 100 | times: media_width | divided_by: desktop_columns | round }} px, (min-width: 990px) calc( {{ media_width | times: 100 | divided_by: desktop_columns }}
+  vw - 10rem), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw /
   {{ mobile_columns }}
 - 4rem)
 {%- endcapture -%}
@@ -46,7 +45,7 @@ modal_id: section.id
     {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
       <span class="product__media-icon motion-reduce quick-add-hidden"> {% render 'icon-play' %}</span>
     <div class="product__media media gradient global-media-settings" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
-      {{ media.preview_image | image_url: width: 1946 | image_tag:
+      {{ media.preview_image | image_url: width: 1946 | image_tag: 
        loading: lazy,
        sizes: sizes,
        widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946',
@@ -57,7 +56,7 @@ modal_id: section.id
     </a>
   {%- else -%}
     <div class="product__media media gradient global-media-settings" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
-      {{ media.preview_image | image_url: width: 1946 | image_tag:
+      {{ media.preview_image | image_url: width: 1946 | image_tag: 
        loading: lazy,
        sizes: sizes,
        widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946',
@@ -70,21 +69,13 @@ modal_id: section.id
 
 
   <div class="product__media media media--transparent gradient global-media-settings" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
-    {{ media.preview_image | image_url: width: 1946 | image_tag:
+    {{ media.preview_image | image_url: width: 1946 | image_tag: 
      loading: lazy,
      sizes: sizes,
      widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946',
      alt: media.preview_image.alt | escape }}
   </div>
-  <button
-    class="product__media-toggle quick-add-hidden"
-    type="button"
-    aria-haspopup="dialog"
-    data-media-id="{{ media.id }}">
-    <span class="visually-hidden">
-      {{ 'products.product.media.open_media' | t: index: position }}
-    </span>
-  </button>
+
 </modal-opener>
 
 {%- if media.media_type != 'image' -%}
@@ -112,7 +103,7 @@ modal_id: section.id
             {%- render 'icon-play' -%}
           {%- endif -%}
         </span>
-        {{ media.preview_image | image_url: width: 1946 | image_tag:
+        {{ media.preview_image | image_url: width: 1946 | image_tag: 
          loading: lazy,
          sizes: sizes,
          widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946',

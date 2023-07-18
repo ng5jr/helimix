@@ -11,7 +11,12 @@
       href="https://cdn.shopify.com"
       crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     {%- if settings.favicon != blank -%}
       <link
@@ -23,6 +28,34 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+
+        var radioButtons = document.querySelectorAll('.js.product-form__input.color-option input[type="radio"]');
+        var priceContainer = document.getElementById('price-container');
+
+        radioButtons.forEach(function(radioButton) {
+          radioButton.addEventListener('change', function() {
+            var priceElement = document.createElement('p');
+            priceElement.classList.add('price_selected');
+            priceElement.id = 'selected-price';
+            priceElement.textContent = '$24.95';
+            priceContainer.appendChild(priceElement);
+            var price = this.dataset.price;
+            priceElement.textContent = price;
+          });
+          radioButton.addEventListener('click', function() {
+
+            var variantName = this.value;
+
+            var legendElement = this.parentNode.querySelector('.form__label');
+
+            legendElement.textContent = variantName;
+          });
+        });
+
+      });
+    </script>
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link
@@ -493,50 +526,95 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
     <script type="module">
       import Swiper from "https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs";
-      const sliderThumbs = new Swiper(".slider__thumbs .swiper-container", {
-      				direction: "vertical",
-      				slidesPerView: 3,
-      				spaceBetween: 24,
-      				navigation: {
-      					nextEl: ".slider__next",
-      					prevEl: ".slider__prev",
-      				},
-      				freeMode: true,
-      				mousewheel: true,
-      				breakpoints: {
-      					0: {
-      						direction: "horizontal",
-      					},
-      					768: {
-      						direction: "vertical",
-      					},
-      				},
-      			});
-      
-      			const sliderImages = new Swiper(".slider__images .swiper-container", {
-      				direction: "vertical",
-      				slidesPerView: 1,
-      				spaceBetween: 32,
-      				mousewheel: true,
-      				navigation: {
-      					nextEl: ".slider__next",
-      					prevEl: ".slider__prev",
-      				},
-      				grabCursor: true,
-      				thumbs: {
-      					swiper: sliderThumbs,
-      				},
-      				breakpoints: {
-      					0: {
-      						direction: "horizontal",
-      					},
-      					768: {
-      						direction: "vertical",
-      					},
-      				},
-      			});
+      document.addEventListener('DOMContentLoaded', function() {
+                                                                                var radioButtons = document.querySelectorAll('.js.product-form__input.color-option input[type="radio"]');
+                                                                                var sliderThumbs = null;
+                                                                                var sliderImages = null;
+                                                                        
+                                                                        // Initialize Swiper sliders and store the instances
+                                                                                function initSwipers() {
+                                                                                  sliderThumbs = new Swiper(".slider__thumbs .swiper-container", {
+                                                                                    direction: "vertical",
+                                                                                    slidesPerView: 5,
+                                                                                    spaceBetween: 10,
+                                                                                    navigation: {
+                                                                                      nextEl: ".slider__next",
+                                                                                      prevEl: ".slider__prev"
+                                                                                    },
+                                                                                    freeMode: false,
+                                                                                    mousewheel: false,
+                                                                                    breakpoints: {
+                                                                                      0: {
+                                                                                        direction: "horizontal"
+                                                                                      },
+                                                                                      768: {
+                                                                                        direction: "vertical"
+                                                                                      }
+                                                                                    }
+                                                                                  });
+                                                                        
+                                                                                  sliderImages = new Swiper(".slider__images .swiper-container", {
+                                                                                   
+                                                                                    direction: "vertical",
+                                                                                    slidesPerView: 1,
+                                                                                    spaceBetween: 32,
+                                                                                    mousewheel: false,
+                                                                                    
+                                                                                    navigation: {
+                                                                                      nextEl: ".slider__next",
+                                                                                      prevEl: ".slider__prev"
+                                                                                    },
+                                                                                    grabCursor: false,
+                                                                                    thumbs: {
+                                                                                      swiper: sliderThumbs
+                                                                                    },
+                                                                                    breakpoints: {
+                                                                                      0: {
+                                                                                        direction: "horizontal"
+                                                                        
+                                                                                      },
+                                                                                      768: {
+                                                                                        direction: "vertical",
+                                                                                        
+                                                                                      }
+                                                                                    }
+                                                                                  });
+                                                                                }
+                                                                        
+                                                                        
+                                                                        // Scroll to the desired slide index in the main images slider
+                                                                                function scrollToSlide(index) {
+                                                                                  if (sliderImages) {
+                                                                                    sliderImages.slideTo(index);
+                                                                                  }
+                                                                                }
+                                                                        
+                                                                        // Get the index of the selected variant radio button
+                                                                                function getSelectedVariantIndex() {
+                                                                                  var selectedVariantIndex = null;
+                                                                                  radioButtons.forEach(function(radioButton, index) {
+                                                                                    if (radioButton.checked) {
+                                                                                      selectedVariantIndex = index;
+                                                                                    }
+                                                                                  });
+                                                                                  return selectedVariantIndex;
+                                                                                }
+                                                                        
+                                                                        // Initialize Swipers and attach click event listeners to variant radio buttons
+                                                                                initSwipers();
+                                                                                radioButtons.forEach(function(radioButton, index) {
+                                                                                  radioButton.addEventListener('click', function() {
+                                                                                    var selectedVariantIndex = getSelectedVariantIndex();
+                                                                                    if (selectedVariantIndex !== null) {
+                                                                                      scrollToSlide(selectedVariantIndex);
+                                                                                    }
+                                                                                  });
+                                                                                });
+                                                                              });
     </script>
+
   </body>
 </html>
