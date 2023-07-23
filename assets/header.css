@@ -333,10 +333,7 @@ main section,
   .price_desktop {
     display: none;
   }
-  .slider__images {
-    height: unset;
-    height: fit-content;
-  }
+
   .product__info-wrapper {
     padding: 0 !important;
     width: 100%;
